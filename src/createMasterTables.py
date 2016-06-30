@@ -48,10 +48,13 @@ def generate_order_table(norders=1000,nusers=100,ngoods=100,ndays=30):
     DATE = np.random.choice(days, size=norders)
     DATE.sort()
 
+    DEVICETYPE = np.random.choice([0,1,2], size=norders, p=[0.1,0.3,0.6])
+
     df = pd.DataFrame({
         "date": DATE,
         "goods_id": GOODSID,
-        "user_id": USERID
+        "user_id": USERID,
+        "device_type": DEVICETYPE 
         })
     return df
 
@@ -96,8 +99,9 @@ df_joined = pd.merge(
         )
 df_joined.sort('date', inplace=True)
 df_joined.reset_index(inplace=True)
+print df_joined
 # print df_joined
-df_joined.groupby('region').sum()
-pv = pd.pivot_table(df_joined, values='price',index='region')
+# df_joined.groupby('region').sum()
+# pv = pd.pivot_table(df_joined, values='price',index='region')
 
-print pv
+# print pv
