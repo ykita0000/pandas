@@ -29,4 +29,4 @@ df = pd.DataFrame({
     "user_id": USERID
     })
 print df
-df.to_pickle('data/userMaster.py')
+df.to_pickle('data/userMaster.pkl')

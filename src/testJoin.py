@@ -20,8 +20,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-df_order = pd.read_pickle('data/orderMaster.py')
-df_user = pd.read_pickle('data/userMaster.py')
+df_order = pd.read_pickle('data/orderMaster.pkl')
+df_user = pd.read_pickle('data/userMaster.pkl')
 # df_joined = df_order.join(df_user
 # , how='inner', on='user_id', lsuffix='int', rsuffix='int')
 df_joined = pd.merge(

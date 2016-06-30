@@ -68,9 +68,9 @@ try:
 except:
     with open('data/createMasterTables.pkl', 'wb') as output:
         print 'generating data frames...'
-        norders = 100000
-        nusers = 10000
-        ngoods = 10000
+        norders = 1000
+        nusers = 100
+        ngoods = 1000
         ndays = 365*5
 
         df_users = generate_user_table(nusers)
@@ -98,6 +98,6 @@ df_joined.sort('date', inplace=True)
 df_joined.reset_index(inplace=True)
 # print df_joined
 df_joined.groupby('region').sum()
-pv = pd.pivot_table(df_joined, values='price',rows='region')
+pv = pd.pivot_table(df_joined, values='price',index='region')
 
 print pv

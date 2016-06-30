@@ -31,5 +31,5 @@ df = pd.DataFrame({
     "price": PRICES
     })
 rint df
-df.to_pickle('data/goodsMaster.py')
+df.to_pickle('data/goodsMaster.pkl')
 

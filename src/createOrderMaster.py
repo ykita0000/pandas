@@ -30,4 +30,4 @@ df = pd.DataFrame({
     "date": DATE,
     "user_id": USERID
     })
-df.to_pickle('data/orderMaster.py')
+df.to_pickle('data/orderMaster.pkl')

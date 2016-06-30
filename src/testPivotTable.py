@@ -19,13 +19,16 @@ from gimei import Gimei
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-df = pd.read_pickle('data/orderMaster.py')
+pkl = pd.read_pickle('data/createMasterTables.pkl')
+df_order = pkl["order"]
+df_goods = pkl["goods"]
+df = pd.merge(df_order, df_goods, how="inner")
 
-pv1 = pd.pivot_table(df, values='payment', rows=['user_id','date'])
+pv1 = pd.pivot_table(df, values='price', index=['user_id','date'])
 print pv1
 
 df.groupby(['user_id', 'user_id']).sum()
-pv2 = pd.pivot_table(df, values='payment',rows=['date',], cols='user_id')
+pv2 = pd.pivot_table(df, values='price',index=['date',], columns='user_id')
 pv2.fillna(0, inplace=True)
 print pv2
 pv2.plot()
