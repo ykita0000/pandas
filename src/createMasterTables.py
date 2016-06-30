@@ -27,7 +27,6 @@ def generate_user_table(nusers=100):
 
 def generate_goods_table(ngoods=100):
     GOODSID = range(ngoods)
-    # NAME = [ Gimei().name for _ in xrange(ngoods) ]
     REGION = [ Gimei().address.prefecture.kanji for _ in xrange(ngoods) ]
     PRICES = map(int, np.random.exponential(10000, size=ngoods))
     df = pd.DataFrame({
@@ -41,17 +40,13 @@ def generate_goods_table(ngoods=100):
 
 def generate_order_table(norders=1000,nusers=100,ngoods=100,ndays=30):
     ORDERID = range(norders)
-
+    GOODSID = np.random.choice(range(ngoods), size=norders)
     USERID = np.random.choice(range(nusers), size=norders)
 
-    GOODSID = np.random.choice(range(ngoods), size=norders)
-    
     day0 = datetime.date.today()
     days = [day0 - datetime.timedelta(days=i) for i in xrange(ndays)]
     DATE = np.random.choice(days, size=norders)
     DATE.sort()
-
-    USERID = np.random.choice(range(nusers), size=norders)
 
     df = pd.DataFrame({
         "date": DATE,
@@ -77,14 +72,15 @@ except:
         nusers = 10000
         ngoods = 10000
         ndays = 365*5
-        
+
         df_users = generate_user_table(nusers)
         df_goods = generate_goods_table(ngoods)
         df_order = generate_order_table(norders,nusers,ngoods,ndays)
-        pkl = {}
-        pkl['user'] = df_users
-        pkl['goods'] = df_goods
-        pkl['order'] = df_order
+        pkl = {
+                'user': df_users,
+                'goods': df_goods,
+                'order': df_order
+                }
         pickle.dump(pkl, output) 
 
 # print df_order
